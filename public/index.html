@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Ably Message Channel Client</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="stylesheets/style.css">
+  </head>
+
+  <body>
+    <table>
+      <tr>
+        <td style= "width:30%; vertical-align: top;">
+          <!--<img class = "newappIcon" src="images/newapp-icon.png">-->
+          <img class = "newappIcon" src="https://assets.ably.io/assets/svg/header_logo-769bfb433fa02362f4f700d618e37e84311e4594a3ace4f384bde54d4a6606c7.svg">
+          Channel:
+          <input type="text" value="sackyChan" name="channel" id="fchannel" style="
+              background: transparent;
+              color: white;
+              border: none;
+              font-size: 14px;
+              border-bottom: 1px solid white;" 
+              onchange="chnageChannel()"></input>
+        </td>
+        <td>
+          <h1 id="message">Ably Message Channel Client</h1>
+          <p class='description'></p> Enter message to publish to <span class = "blue">Ably</span>.
+          <p></p>
+          <form action="javascript:publish()">
+            <input type="text" size="48" name="fname" id="fmessage"></input>
+            <input type="submit" value="Publish"></button>
+          </form>
+          <p class='description'></p> Latest messages from Ably on my channel:
+          <p class='description'></p> <div max-height="300" id="messages"></div>
+        </td>
+      </tr>
+    </table>
+
+<script src="//cdn.ably.io/lib/ably.min-1.js"></script>
+​
+<script type="text/javascript">
+  
+  var ably = new Ably.Realtime('1Du6kg.QSZDrg:u_AcgCklGV8D2qZa');
+  console.log(ably)
+  var channelName = document.getElementById('fchannel').value
+  var channel = ably.channels.get(channelName);
+  channel.subscribe(myListener);
+
+  function publish() {
+    var message = document.getElementById('fmessage')
+    channel.publish('greeting', message.value);
+  }
+
+  var myListener = function(msg) {
+      console.log("Received: " + JSON.stringify(msg.data));
+      var mydiv = document.getElementById('messages')
+      var current = mydiv.innerHTML.slice(0, 500);
+      mydiv.innerHTML = '<span class="blue">'+ new Date().toLocaleString() + ': </span>' + msg.data + '<br/>' + current
+    };
+
+  function chnageChannel() {
+    console.log('changed');
+    channel.unsubscribe();
+    var channelName = document.getElementById('fchannel').value
+    channel = ably.channels.get(channelName);
+    channel.subscribe(myListener);
+    var mydiv = document.getElementById('messages')
+    mydiv.innerHTML = ''
+  }
+</script>
+
+  </body>
+
+</html>

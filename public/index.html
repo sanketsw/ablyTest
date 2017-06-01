@@ -16,7 +16,7 @@
           <!--<img class = "newappIcon" src="images/newapp-icon.png">-->
           <img class = "newappIcon" src="https://assets.ably.io/assets/svg/header_logo-769bfb433fa02362f4f700d618e37e84311e4594a3ace4f384bde54d4a6606c7.svg">
           Channel:
-          <input type="text" value="sackyChan" name="channel" id="fchannel" style="
+          <input type="text" name="channel" id="fchannel" style="
               background: transparent;
               color: white;
               border: none;
@@ -43,10 +43,9 @@
 <script type="text/javascript">
   
   var ably = new Ably.Realtime('1Du6kg.QSZDrg:u_AcgCklGV8D2qZa');
-  console.log(ably)
-  var channelName = document.getElementById('fchannel').value
-  var channel = ably.channels.get(channelName);
-  channel.subscribe(myListener);
+  // var channelName = document.getElementById('fchannel').value
+  // var channel = ably.channels.get(channelName);
+  // channel.subscribe(myListener);
 
   function publish() {
     var message = document.getElementById('fmessage')

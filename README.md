@@ -1,8 +1,6 @@
-# Node.js Hello World Sample
+# Ably client for sending and listening to messages on a perticular channel
 
-This application demonstrates a simple, reusable Node.js web application based on the Express framework.
-
-[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/IBM-Bluemix/nodejs-helloworld)
+This application demonstrates a simple, reusable Node.js web application based on the Express framework to listen to a specified Ably channel. Users can specify apikey and channel to listen to.54564
 
 ## Run the app locally
 
@@ -13,3 +11,10 @@ This application demonstrates a simple, reusable Node.js web application based o
 + Access the running app in a browser at <http://localhost:6001>
 
 [Install Node.js]: https://nodejs.org/en/download/
+
+## Running in Bluemix
+1. cf login
++ cf push <app-name>
+
+## Live Demo
+http://ablytest.mybluemix.net/    

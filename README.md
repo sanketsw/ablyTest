@@ -1,4 +1,4 @@
-# Ably client for sending and listening to messages on a perticular channel
+# Ably client for sending and listening to messages on a particular channel
 
 This application demonstrates a simple, reusable Node.js web application based on the Express framework to listen to a specified [Ably][] channel. Users can specify apikey and channel to listen to.54564
 

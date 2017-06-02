@@ -3,61 +3,17 @@
  */
 
 body,html {
-	background-color: #3b4b54; width : 100%;
-	height: 100%;
-	margin: 0 auto;
-	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	background-color: #3b4b54; 
 	color: #ffffff;
-}
-
-a {
-	text-decoration: none;
-	color: #00aed1;
-}
-
-a:hover {
-	text-decoration: underline;
-}
-
-.newappIcon {
-	padding-top: 10%;
-	display: block;
-	margin: 0 auto;
-	padding-bottom: 2em;
-	max-width:200px;
-}
-
-h1 {
-	font-weight: bold;
-	font-size: 2em;
-}
-
-.leftHalf {
-	float: left;
-	background-color: #26343f;
-	width: 45%;
-	height: 100%;
-}
-
-.rightHalf {
-	float: right;
-	width: 55%;
-	background-color: #313f4a;
-	height: 100%;
-	overflow:auto;
-}
-
-.blue {
-	color: #00aed1;
 }
 
 
 table {
 	table-layout: fixed;
-	width: 800px;
+	/*width: 800px;*/
 	margin: 0 auto;
 	word-wrap: break-word;
-	padding-top:10%;
+	/*padding-top:10%;*/
 }
 
 th {
@@ -78,5 +34,15 @@ th, td {
 pre {
 	padding: 0;
 	margin: 0;
+}
+
+.lineinput {
+	background: transparent;
+    color: lightgray;
+    border: 0px solid lightgray;
+    border-radius: 0px;
+    border-bottom: 1px solid lightgray;
+    -webkit-box-shadow: inset 0 0px 0px rgba(0,0,0,.075);
+    box-shadow: inset 0 0px 0px
 }
 

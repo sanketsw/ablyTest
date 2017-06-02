@@ -3,46 +3,54 @@
 
   <head>
     <title>Ably Message Channel Client</title>
+    
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="stylesheets/style.css">    
   </head>
 
   <body>
+    <div class="container">
     <table>
       <tr>
-        <td style= "width:30%; vertical-align: top;">
+        <td style="vertical-align: top;">
           <!--<img class = "newappIcon" src="images/newapp-icon.png">-->
-          <img class = "newappIcon" src="https://assets.ably.io/assets/svg/header_logo-769bfb433fa02362f4f700d618e37e84311e4594a3ace4f384bde54d4a6606c7.svg">
-          Channel:
-          <input type="text" name="channel" id="fchannel" style="
-              background: transparent;
-              color: white;
-              border: none;
-              font-size: 14px;
-              border-bottom: 1px solid white;" 
-              onchange="chnageChannel()"></input>
-        </td>
-        <td>
-          <h1 id="message">Ably Message Channel Client</h1>
-          <p class='description'></p> Enter message to publish to <span class = "blue">Ably</span>.
-          <p></p>
+          <p class='description'></p><img class = "newappIcon" src="https://assets.ably.io/assets/svg/header_logo-769bfb433fa02362f4f700d618e37e84311e4594a3ace4f384bde54d4a6606c7.svg">
+          <h3 id="message">Ably Message Client</h3>
+          <span style="color:#5cb85c">API Key:</span>
+          <input type="text" name="apikey" id="fapikey" class="form-control lineinput"
+              onchange="chnageChannel()"
+              value= "default"></input>
+          <p class='description'></p><span style="color:#5cb85c"> Channel:</span>
+          <input type="text" name="channel" id="fchannel" class="form-control lineinput"
+              onchange="chnageChannel()"
+              value= "sackyChan"></input>
+        
+          <p class='description'></p><span style="color:#5cb85c">Enter message to publish to  Ably</span>
           <form action="javascript:publish()">
-            <input type="text" size="48" name="fname" id="fmessage"></input>
-            <input type="submit" value="Publish"></button>
+            <input type="text" name="fname" id="fmessage" class="form-control"></input>
+            <input type="submit" value="Publish" class="btn btn-success"></button>
           </form>
           <p class='description'></p> Latest messages from Ably on my channel:
           <p class='description'></p> <div max-height="300" id="messages"></div>
         </td>
       </tr>
     </table>
-
+    </div>
 <script src="//cdn.ably.io/lib/ably.min-1.js"></script>
 ​
 <script type="text/javascript">
   
-  var ably = new Ably.Realtime('1Du6kg.QSZDrg:u_AcgCklGV8D2qZa');
+  var ably;
+  var channel;
+
+  window.onload = function() {
+    chnageChannel()
+  }
   // var channelName = document.getElementById('fchannel').value
   // var channel = ably.channels.get(channelName);
   // channel.subscribe(myListener);
@@ -56,12 +64,17 @@
       console.log("Received: " + JSON.stringify(msg.data));
       var mydiv = document.getElementById('messages')
       var current = mydiv.innerHTML.slice(0, 500);
-      mydiv.innerHTML = '<span class="blue">'+ new Date().toLocaleString() + ': </span>' + msg.data + '<br/>' + current
+      mydiv.innerHTML = '<span style="color:#337ab7">'+ new Date().toLocaleString() + ': </span>' + msg.data + '<br/>' + current
     };
 
   function chnageChannel() {
     console.log('changed');
-    channel.unsubscribe();
+    var apikey = document.getElementById('fapikey').value
+    if(apikey == 'default') {
+      apikey = '1Du6kg.QSZDrg:u_AcgCklGV8D2qZa'
+    }
+    ably = new Ably.Realtime(apikey);
+    if(channel) channel.unsubscribe();
     var channelName = document.getElementById('fchannel').value
     channel = ably.channels.get(channelName);
     channel.subscribe(myListener);
